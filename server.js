@@ -1,3 +1,6 @@
+if (typeof(PhusionPassenger) !== 'undefined') {
+    PhusionPassenger.configure({ autoInstall: false });
+}
 const express = require('express');
 const multer = require('multer');
 const ejs = require('ejs');
@@ -63,6 +66,10 @@ app.post('/upload', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-    console.log(`listening on http://localhost:${PORT}`)
-})
+if (typeof(PhusionPassenger) !== 'undefined') {
+    app.listen('passenger');
+} else {
+    app.listen(PORT, () =>{
+        console.log(`listening on http://localhost:${PORT}`);
+    });
+}
